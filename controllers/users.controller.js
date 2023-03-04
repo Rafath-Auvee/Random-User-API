@@ -1,4 +1,5 @@
-const users = require("../public/random.json");
+const users = require("../random.json");
+const fs = require("fs");
 
 module.exports.getAllUsers = async (req, res, next) => {
   try {
@@ -38,5 +39,80 @@ module.exports.getRandomUser = async (req, res, next) => {
     res.status(200).json(randomUser);
   } catch (err) {
     res.status(404).send(`Something Went Worng to Get Random User!`);
+  }
+};
+
+module.exports.saveUser = async (req, res, next) => {
+  try {
+    const { id, gender, name, contact, address, photoUrl } = req.body;
+    if (!id || !gender || !name || !contact || !address || !photoUrl) {
+      return res.status(400).send("Missing required properties");
+    }
+    const newUser = {
+      id,
+      gender,
+      name,
+      contact,
+      address,
+      photoUrl,
+    };
+    users.push(newUser);
+    fs.appendFileSync("./random.json", JSON.stringify(users, null, 2) + "\n", {
+      flag: "w",
+    });
+    res.json(newUser);
+  } catch (err) {
+    res.status(404).send(`Something Went Worng to Save User!`);
+  }
+};
+
+module.exports.updateOneUser = async (req, res, next) => {
+  try {
+    const { id, gender, name, contact, address, photoUrl } = req.body;
+
+    console.log(req.body);
+    if (!id || !gender || !name || !contact || !address || !photoUrl) {
+      return res.status(400).send("Missing required fields");
+    }
+
+    const userIndex = users.findIndex((u) => u.id === id);
+    if (userIndex === -1) {
+      return res.status(404).send("User not found");
+    }
+
+    users[userIndex].gender = gender;
+    users[userIndex].name = name;
+    users[userIndex].contact = contact;
+    users[userIndex].address = address;
+    users[userIndex].photoUrl = photoUrl;
+
+    fs.appendFileSync("./random.json", JSON.stringify(users, null, 2) + "\n", {
+      flag: "w",
+    });
+
+    res.json(users[userIndex]);
+  } catch (err) {
+    res.status(404).send(`Something Went Worng to Update One User!`);
+  }
+};
+
+module.exports.deleteOneUser = async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id);
+
+    const userIndex = users.findIndex((u) => u.id === id);
+    if (userIndex === -1) {
+      return res.status(404).send("User not found");
+    }
+
+    const deletedUser = users.splice(userIndex, 1)[0];
+
+    fs.writeFileSync("./random.json", JSON.stringify(users, null, 2) + "\n", {
+      flag: "w",
+    });
+
+    res.json(deletedUser);
+  } catch (err) {
+    res.status(404).send(`Something Went Worng to Delete One User!`);
   }
 };
