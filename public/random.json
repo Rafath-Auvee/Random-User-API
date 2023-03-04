@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "gender": "male",
+    "name": "John Doe",
+    "contact": "555-1234",
+    "address": "123 Main St, Anytown USA",
+    "photoUrl": "https://example.com/photos/john_doe.jpg"
+  },
+  {
+    "id": 2,
+    "gender": "female",
+    "name": "Jane Smith",
+    "contact": "555-5678",
+    "address": "456 Park Ave, Anytown USA",
+    "photoUrl": "https://example.com/photos/jane_smith.jpg"
+  },
+  {
+    "id": 3,
+    "gender": "male",
+    "name": "Bob Johnson",
+    "contact": "555-2468",
+    "address": "789 Oak St, Anytown USA",
+    "photoUrl": "https://example.com/photos/bob_johnson.jpg"
+  },
+  {
+    "id": 4,
+    "gender": "female",
+    "name": "Alice Brown",
+    "contact": "555-3691",
+    "address": "321 Elm St, Anytown USA",
+    "photoUrl": "https://example.com/photos/alice_brown.jpg"
+  },
+  {
+    "id": 5,
+    "gender": "male",
+    "name": "Jack Wilson",
+    "contact": "555-7854",
+    "address": "654 Pine St, Anytown USA",
+    "photoUrl": "https://example.com/photos/jack_wilson.jpg"
+  },
+  {
+    "id": 6,
+    "gender": "female",
+    "name": "Mary Davis",
+    "contact": "555-9135",
+    "address": "987 Maple St, Anytown USA",
+    "photoUrl": "https://example.com/photos/mary_davis.jpg"
+  },
+  {
+    "id": 7,
+    "gender": "male",
+    "name": "Tom Lee",
+    "contact": "555-3579",
+    "address": "741 Cherry St, Anytown USA",
+    "photoUrl": "https://example.com/photos/tom_lee.jpg"
+  },
+  {
+    "id": 8,
+    "gender": "female",
+    "name": "Sara Jones",
+    "contact": "555-8026",
+    "address": "963 Walnut St, Anytown USA",
+    "photoUrl": "https://example.com/photos/sara_jones.jpg"
+  },
+  {
+    "id": 9,
+    "gender": "male",
+    "name": "Mike Brown",
+    "contact": "555-2468",
+    "address": "753 Oak St, Anytown USA",
+    "photoUrl": "https://example.com/photos/mike_brown.jpg"
+  },
+  {
+    "id": 10,
+    "gender": "female",
+    "name": "Jenny Lee",
+    "contact": "555-3579",
+    "address": "987 Cherry St, Anytown USA",
+    "photoUrl": "https://example.com/photos/jenny_lee.jpg"
+  }
+]
