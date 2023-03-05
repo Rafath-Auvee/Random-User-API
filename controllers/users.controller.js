@@ -100,7 +100,7 @@ module.exports.updateOneUser = async (req, res, next) => {
       flag: "w",
     });
 
-    res.json(users[userIndex]);
+    res.status(200).json(users[userIndex]);
   } catch (err) {
     res.status(404).send(`Something Went Worng to Update One User!`);
   }
