@@ -17,6 +17,11 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
+app.get("/users", (req, res) => {
+  // res.send("Hello World");
+  res.sendFile(__dirname + "/public/index.html");
+});
+
 app.all("*", (req, res) => {
   res.send("NO route found.");
 });
