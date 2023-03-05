@@ -84,6 +84,9 @@ module.exports.updateOneUser = async (req, res, next) => {
     const { id, gender, name, contact, address, photoUrl } = req.body;
 
     console.log(req.body);
+    if (!id || !gender || !name || !contact || !address || !photoUrl) {
+      return res.status(400).send("Missing required fields");
+    }
 
     const userIndex = users.findIndex((u) => u.id === id);
     if (userIndex === -1) {
@@ -100,9 +103,9 @@ module.exports.updateOneUser = async (req, res, next) => {
       flag: "w",
     });
 
-    res.status(200).json(users[userIndex]);
+    res.json(users[userIndex]);
   } catch (err) {
-    res.status(404).send(`Something Went Worng to Update One User!`);
+    res.status(404).send(`Something Went Worng to Update One User! ${err}`);
   }
 };
 
