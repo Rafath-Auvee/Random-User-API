@@ -1,8 +1,21 @@
 const users = require("../random.json");
 const fs = require("fs");
 
+function saveUsersData(users) {
+  const jsonData = JSON.stringify(users, null, 2);
+
+  fs.writeFile("/random.json", jsonData, (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("Users data updated successfully");
+    }
+  });
+}
+
 module.exports.getAllUsers = async (req, res, next) => {
   try {
+    // console.log(req.body);
     const limit = parseInt(req.query.limit) || users.length;
     const usersSubset = users.slice(0, limit);
     res.status(200).json(usersSubset);
@@ -114,5 +127,29 @@ module.exports.deleteOneUser = async (req, res, next) => {
     res.json(deletedUser);
   } catch (err) {
     res.status(404).send(`Something Went Worng to Delete One User!`);
+  }
+};
+
+module.exports.bulkUpdate = async (req, res, next) => {
+  try {
+    const { ids } = req.query;
+    const userData = req.body;
+
+    for (let i = 0; i < userData.length; i++) {
+      const user = users.find((u) => u.id === userData[i].id);
+      if (user && ids.includes(userData[i].id.toString())) {
+        // Update the user information based on the data provided in the request body
+        user.gender = userData[i].gender || user.gender;
+        user.name = userData[i].name || user.name;
+        user.contact = userData[i].contact || user.contact;
+        user.address = userData[i].address || user.address;
+        user.photoUrl = userData[i].photoUrl || user.photoUrl;
+      }
+    }
+
+    fs.writeFileSync("./random.json", JSON.stringify(users, null, 2));
+    res.send("Users updated successfully");
+  } catch (err) {
+    res.status(404).send(`Something Went Worng to bulk update!`);
   }
 };
