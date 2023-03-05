@@ -135,6 +135,13 @@ module.exports.bulkUpdate = async (req, res, next) => {
     const { ids } = req.query;
     const userData = req.body;
 
+    for (const id of ids) {
+      const userIndex = users.findIndex((u) => u.id === parseInt(id));
+      if (userIndex === -1) {
+        return res.status(404).send(`User with id ${id} not found`);
+      }
+    }
+
     for (let i = 0; i < userData.length; i++) {
       const user = users.find((u) => u.id === userData[i].id);
       if (user && ids.includes(userData[i].id.toString())) {
