@@ -1,17 +1,7 @@
 const users = require("../random.json");
 const fs = require("fs");
 
-function saveUsersData(users) {
-  const jsonData = JSON.stringify(users, null, 2);
 
-  fs.writeFile("/random.json", jsonData, (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log("Users data updated successfully");
-    }
-  });
-}
 
 module.exports.getAllUsers = async (req, res, next) => {
   try {
@@ -70,9 +60,9 @@ module.exports.saveUser = async (req, res, next) => {
       photoUrl,
     };
     users.push(newUser);
-    fs.appendFileSync("./random.json", JSON.stringify(users, null, 2) + "\n", {
-      flag: "w",
-    });
+    // fs.appendFileSync("./random.json", JSON.stringify(users, null, 2) + "\n", {
+    //   flag: "w",
+    // });
     res.json(newUser);
   } catch (err) {
     res.status(404).send(`Something Went Worng to Save User!`);
@@ -99,9 +89,9 @@ module.exports.updateOneUser = async (req, res, next) => {
     users[userIndex].address = address;
     users[userIndex].photoUrl = photoUrl;
 
-    fs.appendFileSync("./random.json", JSON.stringify(users, null, 2) + "\n", {
-      flag: "w",
-    });
+    // fs.appendFileSync("./random.json", JSON.stringify(users, null, 2) + "\n", {
+    //   flag: "w",
+    // });
 
     res.json(users[userIndex]);
   } catch (err) {
@@ -120,9 +110,9 @@ module.exports.deleteOneUser = async (req, res, next) => {
 
     const deletedUser = users.splice(userIndex, 1)[0];
 
-    fs.writeFileSync("./random.json", JSON.stringify(users, null, 2) + "\n", {
-      flag: "w",
-    });
+    // fs.writeFileSync("./random.json", JSON.stringify(users, null, 2) + "\n", {
+    //   flag: "w",
+    // });
 
     res.json(deletedUser);
   } catch (err) {
@@ -154,7 +144,7 @@ module.exports.bulkUpdate = async (req, res, next) => {
       }
     }
 
-    fs.writeFileSync("./random.json", JSON.stringify(users, null, 2));
+    // fs.writeFileSync("./random.json", JSON.stringify(users, null, 2));
     res.send("Users updated successfully");
   } catch (err) {
     res.status(404).send(`Something Went Worng to bulk update!`);
