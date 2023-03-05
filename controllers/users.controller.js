@@ -84,9 +84,6 @@ module.exports.updateOneUser = async (req, res, next) => {
     const { id, gender, name, contact, address, photoUrl } = req.body;
 
     console.log(req.body);
-    if (!id || !gender || !name || !contact || !address || !photoUrl) {
-      return res.status(400).send("Missing required fields");
-    }
 
     const userIndex = users.findIndex((u) => u.id === id);
     if (userIndex === -1) {
